@@ -8,3 +8,4 @@ db.sqlite3
 /django_project
 /.idea
 /.vscode
+/media
