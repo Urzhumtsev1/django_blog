@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
-	ListView, 
-	DetailView, 
+	ListView,
+	DetailView,
 	CreateView,
 	UpdateView,
 	DeleteView
@@ -21,16 +21,17 @@ class PostListView(ListView):
 	template_name = 'blog/home.html' # <app>/<model>_<viewtype>.html
 	context_object_name = 'posts'
 	ordering = ['-date_posted']
+	paginate_by = 5
 
 
 class PostDetailView(DetailView):
 	model = Post
-	
+
 
 class PostCreateView(LoginRequiredMixin, CreateView):
 	model = Post
 	fields = ['title', 'content']
-	# success_url = reverse_lazy('blog-home') 
+	# success_url = reverse_lazy('blog-home')
 	# If we want user get back on homepage after new post created
 
 	def form_valid(self, form):
@@ -41,7 +42,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	model = Post
 	fields = ['title', 'content']
-	# success_url = reverse_lazy('blog-home') 
+	# success_url = reverse_lazy('blog-home')
 	# If we want user get back on homepage after new post created
 
 	def form_valid(self, form):
